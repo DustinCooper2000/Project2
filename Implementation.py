@@ -65,13 +65,19 @@ fifth_decade = ["https://en.wikisource.org/wiki/Barack_Obama%27s_Second_State_of
 
 
 def scraper():
-    url = "https://en.wikisource.org/wiki/Portal:State_of_the_Union_Speeches_by_United_States_Presidents"
-    resp = requests.get(url)
-    soup = BeautifulSoup(resp.content, "lxml")
-    print(soup)
+    for i in first_decade:
+        url = i
+        resp = requests.get(url)
+        soup = BeautifulSoup(resp.content, "lxml")
+        address = soup.find("div", class_= "mw-parser-output")
+        print(address)
 
 def main():
-    scraper()
+    url = "https://en.wikisource.org/wiki/Richard_Nixon%27s_First_State_of_the_Union_Address"
+    resp = requests.get(url)
+    soup = BeautifulSoup(resp.content, "lxml")
+    body = soup.find("div", class_="mw-parser-output")
+    print(body.text)
 
 
 main()
